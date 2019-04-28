@@ -22,9 +22,9 @@ userdata: firmware.fbi
 
 %.fbi: %.bin
 ifeq ($(CPUENDIANNESS),little)
-	$(PYTHON) -m litex.soc.tools.mkmscimg -f --little $< -o $@
+	$(PYTHON) -m litex.soc.software.mkmscimg -f --little $< -o $@
 else
-	$(PYTHON) -m litex.soc.tools.mkmscimg -f $< -o $@
+	$(PYTHON) -m litex.soc.software.mkmscimg -f $< -o $@
 endif
 
 %.bin: %.elf
