@@ -18,7 +18,7 @@ all: userdata
 
 userdata: firmware.fbi
 	dd if=../bios/bios.bin of=../userdata.bin bs=0x8000 count=1
-	dd if=firmware.fbi of=../userdata.bin bs=0x8000 oseek=1 count=21
+	dd if=firmware.fbi of=../userdata.bin bs=0x8000 seek=1 count=21
 
 %.fbi: %.bin
 ifeq ($(CPUENDIANNESS),little)
