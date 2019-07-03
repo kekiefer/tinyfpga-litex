@@ -14,16 +14,7 @@ from litex.soc.integration.builder import *
 from litex.soc.cores import spi_flash
 from litex.soc.cores.gpio import GPIOOut
 
-# Peripherals ------------------------------------------------------------------
-
-TINYLITEX_PERIPHERALS = [
-    (
-        "serial", 0,
-        Subsignal("tx", Pins("C2")),
-        Subsignal("rx", Pins("B1")),
-        IOStandard("LVCMOS33")
-    ),
-]
+from litex_boards.partner.platforms import tinyfpga_bx
 
 # TinyFPGASoC ------------------------------------------------------------------
 
@@ -34,7 +25,8 @@ class TinyLiteX(SoCCore):
 
     # Add SPI flash to the Control and Status Register memory space
     csr_map = {
-        "spiflash":   16
+        "spiflash":   16,
+        "leds": None, # csr_id not provided: allocate csr to the first available id
     }
     csr_map.update(SoCCore.csr_map)
 
@@ -47,14 +39,13 @@ class TinyLiteX(SoCCore):
     def __init__(self, platform, **kwargs):
 
         # We need at least a serial port peripheral
-        platform.add_extension(TINYLITEX_PERIPHERALS)
+        platform.add_extension(tinyfpga_bx.serial)
 
         sys_clk_freq = int(1e9/platform.default_clk_period)
         SoCCore.__init__(self, platform, clk_freq=sys_clk_freq,
                          integrated_rom_size=0,
                          integrated_main_ram_size=0,
                          integrated_sram_size=10*1024,
-                         csr_expose=True,
                          cpu_reset_address=0x20050000,
                          **kwargs)
 
@@ -107,7 +98,7 @@ def main():
     soc_core_args(parser)
     parser.add_argument("--platform",
                         help="module name of the platform to build for",
-                        default="litex.boards.platforms.tinyfpga_bx")
+                        default="litex_boards.partner.platforms.tinyfpga_bx")
     parser.add_argument("--gateware-toolchain", default=None,
                         help="FPGA gateware toolchain used for build")
     args = parser.parse_args()

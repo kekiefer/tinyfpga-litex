@@ -17,7 +17,7 @@ A minimal LiteX SoC definition for the TinyFPGA. Currently, only TinyFPGA BX is 
 
 4. Build the SoC:
 
-        python3 tinyfpga_litex.py --platform litex.boards.platforms.tinyfpga_bx --cpu-type vexriscv --cpu-variant=lite
+        python3 tinyfpga_litex.py --platform litex_boards.partner.platforms.tinyfpga_bx --cpu-type vexriscv --cpu-variant=lite
 
 5. Program the gateware bitstream and the firmware:
 
@@ -41,8 +41,8 @@ I have an FTDI serial cable that plugs directly into pins soldered to the TinyFP
 
     (
         "serial", 0,
-        Subsignal("tx", Pins("C2")),
-        Subsignal("rx", Pins("B1")),
+        Subsignal("tx", Pins("GPIO:0")),
+        Subsignal("rx", Pins("GPIO:1")),
         IOStandard("LVCMOS33")
     )
 
