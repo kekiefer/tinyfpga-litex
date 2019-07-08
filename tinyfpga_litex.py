@@ -16,6 +16,18 @@ from litex.soc.cores.gpio import GPIOOut
 
 from litex_boards.partner.platforms import tinyfpga_bx
 
+# Peripherals ------------------------------------------------------------------
+
+# Comment out to use default pins (tx=GPIO:0 (A2), rx=GPIO:1 (A1))
+tinyfpga_bx.serial = [
+    (
+        "serial", 0,
+        Subsignal("tx", Pins("C2")),
+        Subsignal("rx", Pins("B1")),
+        IOStandard("LVCMOS33")
+    ),
+]
+
 # TinyFPGASoC ------------------------------------------------------------------
 
 class TinyLiteX(SoCCore):

@@ -41,12 +41,12 @@ If everything works, you should see output on the UART and a flashing LED.
 
 ## UART configuration
 
-**Make sure to connect an UART adapter to the TinyFPGA BX.** Floating serial signals result in undefined behavior which can prevent the SoC to boot. I have an FTDI serial cable that plugs directly into pins soldered to the TinyFPGA BX and the [tinyfpga_bx platform definition](https://github.com/litex-hub/litex-boards/blob/master/litex_boards/partner/platforms/tinyfpga_bx.py) contains a [serial peripheral](https://github.com/litex-hub/litex-boards/blob/master/litex_boards/partner/platforms/tinyfpga_bx.py#L50-L56) with the following pins:
+**Make sure to connect an UART adapter to the TinyFPGA BX.** Floating serial signals result in undefined behavior which can prevent the SoC to boot. I have an FTDI serial cable that plugs directly into pins soldered to the TinyFPGA BX, so I have configured tinyfpga_bx platform definition to add the serial peripheral with the following pins:
 
     (
         "serial", 0,
-        Subsignal("tx", Pins("GPIO:0")), # C2
-        Subsignal("rx", Pins("GPIO:1")), # B1
+        Subsignal("tx", Pins("C2")),
+        Subsignal("rx", Pins("B1")),
         IOStandard("LVCMOS33")
     )
 
