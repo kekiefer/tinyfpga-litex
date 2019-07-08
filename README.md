@@ -6,9 +6,16 @@ A minimal LiteX SoC definition for the TinyFPGA. Currently, only TinyFPGA BX is 
 
 1. Install LiteX according to the Advanced or Medium quickstart guide on [LiteX GitHub](https://github.com/enjoy-digital/litex). Note that depending on what CPU you would like to use (see Caveats below) your target compiler may be available in your system's package manager!
 
-2. Install LiteX-Boards (do not use [upstream](https://github.com/litex-hub/litex-boards) until [#5](https://github.com/litex-hub/litex-boards/pull/5) is merged)
+2. Install LiteX-Boards (depending on your workflow)
 
-        pip3 install git+https://github.com/DurandA/litex-boards
+        pip3 install git+https://github.com/litex-hub/litex-boards
+
+        - or -
+
+        git clone https://github.com/litex-hub/litex-boards
+        cd litex-boards
+        python3 setup.py develop
+        cd ..
 
 3. Install tinyprog, if you don't already have it
 
